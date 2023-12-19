@@ -7,7 +7,7 @@ resource "aws_instance" "webserver" {
   vpc_security_group_ids      = [aws_security_group.sg.id]
   subnet_id                   = aws_subnet.subnet.id
   user_data                   = "${file("create_apache.sh")}"
-
+  iam_instance_profile        = "rolAdmin"
   tags = {
     Name = "webserver"
   }

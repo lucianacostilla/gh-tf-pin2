@@ -4,7 +4,7 @@
 
 # Build an S3 bucket to store TF state
 resource "aws_s3_bucket" "state_bucket" {
-  bucket = var.name_of_s3_bucket
+  bucket = var.s3_nombre
 
   # Tells AWS to encrypt the S3 bucket at rest by default
   server_side_encryption_configuration {
@@ -32,7 +32,7 @@ resource "aws_s3_bucket" "state_bucket" {
 
 # Build a DynamoDB to use for terraform state locking
 resource "aws_dynamodb_table" "tf_lock_state" {
-  name = var.dynamo_db_table_name
+  name = var.dynamo_db_nombre
 
   # Pay per request is cheaper for low-i/o applications, like our TF lock state
   billing_mode = "PAY_PER_REQUEST"
@@ -47,7 +47,7 @@ resource "aws_dynamodb_table" "tf_lock_state" {
   }
 
   tags = {
-    Name    = var.dynamo_db_table_name
+    Name    = var.dynamo_db_nombre
     BuiltBy = "Terraform"
   }
 }
